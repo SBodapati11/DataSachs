@@ -32,12 +32,12 @@ Takes into account the current stocks in our portfolio and their performance and
 ![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img1.png)
 ![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img2.png)
 ![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img3.png)
-![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img4.png)
 ![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img5.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img4.png)
 
 3. Finding Optimal Portfolio <br>
 This is where all the math and machine learning genius plays in where historical performances are analyzed and optimized portfolio is displayed to the user based on their current stock portfolio choices, essentially making it a good way for them to learn.
-![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img6.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img6.png) <br>
 ![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img7.png)
 
 
