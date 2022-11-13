@@ -23,7 +23,6 @@ gs_tickerDf = tickerData.history(period='1d', start='2022-01-01', end='2022-11-0
 gs_pct_returns = gs_tickerDf.Open.pct_change()
 st.line_chart(gs_tickerDf.Close)
 
-
 st.write("### IBM (50%)")
 tickerSymbol = 'IBM'
 tickerData = yf.Ticker(tickerSymbol)

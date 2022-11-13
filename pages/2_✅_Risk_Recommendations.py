@@ -4,6 +4,7 @@ from scipy.optimize import minimize
 import requests
 import warnings
 import numpy as np
+import yfinance as yf
 
 warnings.filterwarnings("ignore")
 
@@ -117,8 +118,7 @@ dollar_weights_curr.set_index('Assets', inplace=True)
 
 st.bar_chart(dollar_weights_curr)
 
-st.caption("These are the current dollar weightages of the assets in your portfolio.")
-st.caption("In other words, this is how much of each stock you invested in your portfolio.")
+st.caption("These are the current dollar weightages of the assets in your portfolio. In other words, this is how much of each stock you invested in your portfolio.")
 
 st.subheader("Current Portfolio Risk Weights")
 
@@ -128,8 +128,48 @@ risk_weights.set_index('Assets', inplace=True)
 
 st.bar_chart(risk_weights)
 
-st.caption("These are the current risk weightages of the assets in your portfolio.")
-st.caption("In other words, this is how much each stock contributes to the overall risk of your portfolio.")
+st.caption("These are the current risk weightages of the assets in your portfolio. In other words, this is how much each stock contributes to the overall risk of your portfolio.")
+
+def get_portfolio_performance(weights, string):
+    tickerSymbol = 'GS'
+    tickerData = yf.Ticker(tickerSymbol)
+    gs_tickerDf = tickerData.history(period='1d', start='2022-01-01', end='2022-11-01')
+    gs_pct_returns = gs_tickerDf.Open.pct_change()
+
+    tickerSymbol = 'IBM'
+    tickerData = yf.Ticker(tickerSymbol)
+    ibm_tickerDf = tickerData.history(period='1d', start='2022-01-01', end='2022-11-01')
+    ibm_pct_returns = ibm_tickerDf.Open.pct_change()
+
+    returns = pd.DataFrame({'GS Returns': gs_pct_returns[1:], 'IBM Returns': ibm_pct_returns[1:]})
+    weighted_returns = (weights * returns)
+    portfolio_returns = weighted_returns.sum(axis=1)
+
+    starting_money = 10000
+    last_rows = [10000]
+
+    for i in range(len(portfolio_returns)):
+        last_rows.append((portfolio_returns.iloc[i] * last_rows[-1]) + last_rows[-1])
+
+    ending_money = last_rows[-1]
+    portfolio_data = pd.DataFrame(last_rows[1:], index=portfolio_returns.index)
+    st.subheader(f"{string} Portfolio's Performance")
+    st.line_chart(portfolio_data)
+
+    st.subheader(f"{string} Portfolio's Starting Balance")
+    st.write(str(starting_money))
+    st.subheader(f"{string} Portfolio's Ending Balance")
+    st.write(str(ending_money))
+
+    st.subheader(f"{string} Portfolio's Change")
+    change = round(((ending_money - starting_money)/abs(starting_money))*100, 2)
+
+    if change < 0:
+        st.markdown(str(change) + "%")
+    else:
+        st.markdown("+" + str(change) + "%")
+
+get_portfolio_performance(weights, "Your")
 
 st.subheader("Optimal Portfolio Dollar Weights")
 
@@ -138,8 +178,6 @@ optimal_dollar_weights = pd.DataFrame(optimized_data)
 optimal_dollar_weights.set_index('Assets', inplace=True)
 
 st.bar_chart(optimal_dollar_weights)
-st.caption("These are the optimal dollar weightages of the assets in your portfolio.")
-st.caption("In other words, this is how much of each stock you should invest in your portfolio to balance the risk across your portfolio.")
+st.caption("These are the optimal dollar weightages of the assets in your portfolio. In other words, this is how much of each stock you should invest in your portfolio to balance the risk across your portfolio.")
 
-
-
+get_portfolio_performance(optimal_weights, "Optimal")
