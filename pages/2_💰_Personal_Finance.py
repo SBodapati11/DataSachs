@@ -13,9 +13,9 @@ st.empty()
 st.write("# Personal Finance 💰")
 st.write("## Current Portfolio")
 
-st.write("### Google")
+st.write("### Goldman Sachs (50%)")
 # define ticker, get data
-tickerSymbol = 'GOOGL'
+tickerSymbol = 'GS'
 tickerData = yf.Ticker(tickerSymbol)
 # get the start and end
 tickerDf = tickerData.history(period='1d', start='2012-1-01', end='2022-1-01')
@@ -23,8 +23,8 @@ tickerDf = tickerData.history(period='1d', start='2012-1-01', end='2022-1-01')
 st.line_chart(tickerDf.Close)
 
 
-st.write("### Microsoft")
-tickerSymbol = 'MSFT'
+st.write("### IBM (50%)")
+tickerSymbol = 'IBM'
 tickerData = yf.Ticker(tickerSymbol)
 tickerDf = tickerData.history(period='1d', start='2012-1-01', end='2022-1-01')
 st.line_chart(tickerDf.Close)
