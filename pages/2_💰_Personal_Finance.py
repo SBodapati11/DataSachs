@@ -2,6 +2,7 @@ import numpy as np
 import streamlit as st
 import yfinance as yf
 import time
+import pandas as pd
 
 st.set_page_config(
     page_title="Personal Finance",
@@ -11,56 +12,50 @@ st.set_page_config(
 st.empty()
 
 st.write("# Personal Finance 💰")
-st.write("## Current Portfolio")
+st.write("## Current Portfolio (01/01/2022)-(11/01/2022) ")
 
 st.write("### Goldman Sachs (50%)")
 # define ticker, get data
 tickerSymbol = 'GS'
 tickerData = yf.Ticker(tickerSymbol)
 # get the start and end
-tickerDf = tickerData.history(period='1d', start='2012-1-01', end='2022-1-01')
-# Open	High	Low	Close	Volume	Dividends	Stock Splits
-st.line_chart(tickerDf.Close)
+gs_tickerDf = tickerData.history(period='1d', start='2022-01-01', end='2022-11-01')
+gs_pct_returns = gs_tickerDf.Open.pct_change()
+st.line_chart(gs_tickerDf.Close)
 
 
 st.write("### IBM (50%)")
 tickerSymbol = 'IBM'
 tickerData = yf.Ticker(tickerSymbol)
-tickerDf = tickerData.history(period='1d', start='2012-1-01', end='2022-1-01')
-st.line_chart(tickerDf.Close)
+ibm_tickerDf = tickerData.history(period='1d', start='2022-01-01', end='2022-11-01')
+ibm_pct_returns = ibm_tickerDf.Open.pct_change()
+st.line_chart(ibm_tickerDf.Close)
 
-
-# Fake Portfolio
+returns = pd.DataFrame({'GS Returns': gs_pct_returns[1:], 'IBM Returns': ibm_pct_returns[1:]})
+weight = [0.5, 0.5]
+weighted_returns = (weight * returns)
+portfolio_returns = weighted_returns.sum(axis=1)
 
 # Starting Investment:
-starting_money = 100
+starting_money = 10000
 
 st.write("### Your Portfolio")
-progress_bar = st.sidebar.progress(0)
-status_text = st.sidebar.empty()
-last_rows = np.random.randn(1, 1) + starting_money
-chart = st.line_chart(last_rows)
+last_rows = [10000]
 
-ending_money = starting_money
+for i in range(len(portfolio_returns)):
+    last_rows.append((portfolio_returns.iloc[i] * last_rows[-1]) + last_rows[-1])
 
-for i in range(1, 101):
-    new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-    status_text.text("Loading Portfolio... %i%% Complete" % i)
-    chart.add_rows(new_rows)
-    progress_bar.progress(i)
-    last_rows = new_rows
-    ending_money = new_rows[-1]
-    time.sleep(0.05)
-
-progress_bar.empty()
+ending_money = last_rows[-1]
+portfolio_data = pd.DataFrame(last_rows[1:], index=portfolio_returns.index)
+chart = st.line_chart(portfolio_data)
 
 st.write("### Starting Balance")
 st.write(str(starting_money))
 st.markdown("### Ending Balance")
-st.write(str(ending_money[0]))
+st.write(str(ending_money))
 
 st.markdown("### Overall Change")
-change = round(((ending_money[0] - starting_money)/abs(starting_money))*100, 2)
+change = round(((ending_money - starting_money)/abs(starting_money))*100, 2)
 
 if change < 0:
     st.markdown(str(change) + "%")
