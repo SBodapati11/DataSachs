@@ -16,11 +16,8 @@ st.markdown(
     """
 ## Your one stop shop for risk analysis.
 #### Easy as 1, 2, 3!
-### 1. View Your Current Assessment.
-### 2. Input Your Risk History.
-### 3. Calculate Your Risk Score!
-
-### Or... 
-### 0. Help! How Do I Begin?!
+### 1. Get Started With Risk Analysis.
+### 2. View Your Portfolio's Current Performance.
+### 3. Find Optimal Portfolio Based On Risk!
 """
 )
