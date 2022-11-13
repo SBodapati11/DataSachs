@@ -20,7 +20,7 @@ Streamlit Documentation - https://docs.streamlit.io/
 ## What is DataStacks?
 DataStacks is a beginner-friendly tool that focuses on breaking down complex financial concepts so that the average investor stays aware of their investments in the market as well as potential impacts they can make given their risk. Datastacks uses historical Stock data, ATR values and optimization techniques that involve math heavy stuff like Calculus to estimate the Risk in investing in a certain portfolio and calculates the most optimized gain or loss based on the current market situation so that beginner investors have a better idea of their risk.
 
-![alt text](https://github.com/SBodapati11/DataStacks/blob/main/intro)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/intro.png)
 
 ## Components
 There are 3 components to the tool <br>
