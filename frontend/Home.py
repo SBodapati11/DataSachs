@@ -5,7 +5,7 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.write("# Welcome to DataStacks! 👋")
+st.write("# Welcome to DataSachs! 👋")
 
 st.markdown(
     """
