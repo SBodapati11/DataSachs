@@ -18,5 +18,18 @@ Streamlit Documentation - https://docs.streamlit.io/
 
 
 ## What is DataStacks?
-DataStacks is a beginner-friendly tool that focuses on breaking down complex financial concepts so that the average investor stays aware of their investments in the market as well as potential impacts they can make given their risk.
+DataStacks is a beginner-friendly tool that focuses on breaking down complex financial concepts so that the average investor stays aware of their investments in the market as well as potential impacts they can make given their risk. Datastacks uses historical Stock data, ATR values and optimization techniques that involve math heavy stuff like Calculus to estimate the Risk in investing in a certain portfolio and calculates the most optimized gain or loss based on the current market situation so that beginner investors have a better idea of their risk.
+
+## Components
+There are 3 components to the tool <br>
+1. Getting Started <br>
+To help the users gain a basic understanding of Risk Analytics. A tldr in another sense. <br>
+2. Portfolio Current Performance <br>
+Takes into account the current stocks in our portfolio and their performance and displays in a visual format. For demo purposes two stocks were used. Then based on percentages its all combined into one combined portfolio performance graph for the user to see overall performance all in one place with all their different investments within the portfolio classified. <br>
+3. Finding Optimal Portfolio <br>
+This is where all the math and machine learning genius plays in where historical performances are analyzed and optimized portfolio is displayed to the user based on their current stock portfolio choices, essentially making it a good way for them to learn.
+
+
+## Tools Used
+Datastacks is built entirely using Python. Streamlit is used for building the visualization and the front end of the webpage that displays everything in a User Friendly format. We collect all of our data using the alphavantage API which provides us with a lot of historical data and then use python libaries such as numpy and pandas to analyze that data and build models on it.
 
