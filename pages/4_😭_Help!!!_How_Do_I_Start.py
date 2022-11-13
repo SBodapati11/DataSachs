@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 st.set_page_config(
     page_title="Help Me Learn Finance!",
@@ -24,4 +25,7 @@ st.markdown(
     """
 )
 
+image = Image.open('images/DataStacksIcon.png')
+
+st.image(image, caption='DataStacks')
 
