@@ -12,6 +12,8 @@ def get_data(assets):
         atr_data, price_data = get_json(asset)
         assets_data[asset] = {'atr': atr_data, 'daily': price_data}
 
+get_data(["GS", "IBM"])
+
 # Get the data from an API call given an asset
 def get_json(asset):
     atr_url = f"https://www.alphavantage.co/query?function=ATR&symbol={asset}&interval=daily&time_period=14&apikey=8AZWAOQ0LHYGQMJ2"
@@ -48,11 +50,10 @@ def get_correlation(assets):
     data.index = pd.to_datetime(data.index)
     return data.corr(method='pearson')
 
-# Calculate the risk of the Risk Parity Portfolio or the Effective Number of Correlated Bets
+# Calculate the risk of the given portfolio
 def calculate_portfolio_risk(portfolio):
     portfolio_risk = 0
     assets = list(portfolio.keys())
-    get_data(assets)
     weights = []
     correlation_matrix = get_correlation(assets)
     
@@ -67,16 +68,14 @@ def calculate_portfolio_risk(portfolio):
         portfolio_risk += contribution
         portfolio_risk += correlation_component
         weights.append({'contribution': contribution, 'correlation component': correlation_component})
-    return [portfolio_risk, weights]
+    return [assets, portfolio_risk, weights]
 
-# Return the ideal weights 
-def return_weights(weights, risk):
-    result = []
+# Return the weights of the risk for 
+def return_weights(assets, weights, risk):
+    result = {}
     for i in range(len(weights)):
-        result.append((weights[i]['contribution'] + weights[i]['correlation component']) / risk)
+        result[assets[i]] = ((weights[i]['contribution'] + weights[i]['correlation component']) / risk)
     return result
 
-risk, variables = calculate_portfolio_risk({'GS': 0.5, 'IBM': 0.5})
-weights = return_weights(variables, risk)
-print(risk)
-print(weights)
+assets, risk, variables = calculate_portfolio_risk({'GS': 0.5, 'IBM': 0.5})
+weights = return_weights(assets, variables, risk)
