@@ -26,10 +26,19 @@ DataStacks is a beginner-friendly tool that focuses on breaking down complex fin
 There are 3 components to the tool <br>
 1. Getting Started <br>
 To help the users gain a basic understanding of Risk Analytics. A tldr in another sense. <br>
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img8.png)
 2. Portfolio Current Performance <br>
 Takes into account the current stocks in our portfolio and their performance and displays in a visual format. For demo purposes two stocks were used. Then based on percentages its all combined into one combined portfolio performance graph for the user to see overall performance all in one place with all their different investments within the portfolio classified. <br>
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img1.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img2.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img3.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img4.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img5.png)
+
 3. Finding Optimal Portfolio <br>
 This is where all the math and machine learning genius plays in where historical performances are analyzed and optimized portfolio is displayed to the user based on their current stock portfolio choices, essentially making it a good way for them to learn.
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img6.png)
+![alt text](https://github.com/SBodapati11/DataStacks/blob/main/images/img7.png)
 
 
 ## Tools Used
